@@ -87,7 +87,7 @@ function lock(rl::ReentrantLock)
         if rl.reentrancy_cnt == 0
             rl.locked_by = t
             rl.reentrancy_cnt = 1
-            GC.enable_finalizers()
+            GC.disable_finalizers()
             break
         elseif t === notnothing(rl.locked_by)
             rl.reentrancy_cnt += 1
